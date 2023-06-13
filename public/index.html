@@ -1036,104 +1036,14 @@
 
               <!-- Charts -->
               <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-3">
-                <!-- Bar chart card -->
-                <div class="col-span-2 bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
+                <!-- Title anime chart card -->
+                <div class="col-span-3 bg-white rounded-md dark:bg-darker" x-data="{ isOn: false } " id="card-anime">
                   <!-- Card header -->
                   <div class="flex items-center justify-between p-4 border-b dark:border-primary">
-                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Bar Chart</h4>
-                    <div class="flex items-center space-x-2">
-                      <span class="text-sm text-gray-500 dark:text-light">Last year</span>
-                      <button
-                        class="relative focus:outline-none"
-                        x-cloak
-                        @click="isOn = !isOn; $parent.updateBarChart(isOn)"
-                      >
-                        <div
-                          class="w-12 h-6 transition rounded-full outline-none bg-primary-100 dark:bg-primary-darker"
-                        ></div>
-                        <div
-                          class="absolute top-0 left-0 inline-flex items-center justify-center w-6 h-6 transition-all duration-200 ease-in-out transform scale-110 rounded-full shadow-sm"
-                          :class="{ 'translate-x-0  bg-white dark:bg-primary-100': !isOn, 'translate-x-6 bg-primary-light dark:bg-primary': isOn }"
-                        ></div>
-                      </button>
-                    </div>
+                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Titulos coincidentes</h4>
                   </div>
                   <!-- Chart -->
-                  <div class="relative p-4 h-72">
-                    <canvas id="barChart"></canvas>
-                  </div>
-                </div>
-
-                <!-- Doughnut chart card -->
-                <div class="bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
-                  <!-- Card header -->
-                  <div class="flex items-center justify-between p-4 border-b dark:border-primary">
-                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Doughnut Chart</h4>
-                    <div class="flex items-center">
-                      <button
-                        class="relative focus:outline-none"
-                        x-cloak
-                        @click="isOn = !isOn; $parent.updateDoughnutChart(isOn)"
-                      >
-                        <div
-                          class="w-12 h-6 transition rounded-full outline-none bg-primary-100 dark:bg-primary-darker"
-                        ></div>
-                        <div
-                          class="absolute top-0 left-0 inline-flex items-center justify-center w-6 h-6 transition-all duration-200 ease-in-out transform scale-110 rounded-full shadow-sm"
-                          :class="{ 'translate-x-0  bg-white dark:bg-primary-100': !isOn, 'translate-x-6 bg-primary-light dark:bg-primary': isOn }"
-                        ></div>
-                      </button>
-                    </div>
-                  </div>
-                  <!-- Chart -->
-                  <div class="relative p-4 h-72">
-                    <canvas id="doughnutChart"></canvas>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Two grid columns -->
-              <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-3">
-                <!-- Active users chart -->
-                <div class="col-span-1 bg-white rounded-md dark:bg-darker">
-                  <!-- Card header -->
-                  <div class="p-4 border-b dark:border-primary">
-                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Active users right now</h4>
-                  </div>
-                  <p class="p-4">
-                    <span class="text-2xl font-medium text-gray-500 dark:text-light" id="usersCount">0</span>
-                    <span class="text-sm font-medium text-gray-500 dark:text-primary">Users</span>
-                  </p>
-                  <!-- Chart -->
-                  <div class="relative p-4">
-                    <canvas id="activeUsersChart"></canvas>
-                  </div>
-                </div>
-
-                <!-- Line chart card -->
-                <div class="col-span-2 bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
-                  <!-- Card header -->
-                  <div class="flex items-center justify-between p-4 border-b dark:border-primary">
-                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Line Chart</h4>
-                    <div class="flex items-center">
-                      <button
-                        class="relative focus:outline-none"
-                        x-cloak
-                        @click="isOn = !isOn; $parent.updateLineChart()"
-                      >
-                        <div
-                          class="w-12 h-6 transition rounded-full outline-none bg-primary-100 dark:bg-primary-darker"
-                        ></div>
-                        <div
-                          class="absolute top-0 left-0 inline-flex items-center justify-center w-6 h-6 transition-all duration-200 ease-in-out transform scale-110 rounded-full shadow-sm"
-                          :class="{ 'translate-x-0  bg-white dark:bg-primary-100': !isOn, 'translate-x-6 bg-primary-light dark:bg-primary': isOn }"
-                        ></div>
-                      </button>
-                    </div>
-                  </div>
-                  <!-- Chart -->
-                  <div class="relative p-4 h-72">
-                    <canvas id="lineChart"></canvas>
+                  <div class="relative p-4 title-anime-flex" id="arrayContainer">
                   </div>
                 </div>
               </div>
@@ -1673,7 +1583,7 @@
                 type="text"
                 id="search-input"
                 class="w-full py-2 pl-10 pr-4 border rounded-full dark:bg-dark dark:border-transparent dark:text-light focus:outline-none focus:ring"
-                placeholder="Search..."
+                placeholder="Ingrese la URL de la imagen del episodio"
               />
               
             </div>
@@ -1681,15 +1591,15 @@
             <!-- Panel content (Search result) -->
             <div class="flex-1 px-4 pb-4 space-y-4 overflow-y-hidden h hover:overflow-y-auto">
               <h3 class="py-2 text-sm font-semibold text-gray-600 dark:text-light">History</h3>
-              <template>
-                <a href="#" class="flex space-x-4">
+              <template x-for="searchUrl in searchHistory" :key="searchUrl">
+                <a :href="searchUrl" class="flex space-x-4">
                   <div class="flex-shrink-0">
-                    <img class="w-10 h-10 rounded-lg" src="build/images/cover.jpg" alt="Post cover" />
+                    <img class="w-10 h-10 rounded-lg" src="build/images/cover.webp" alt="Post cover" />
                   </div>
                   <div class="flex-1 max-w-xs overflow-hidden">
                     <h4 class="text-sm font-semibold text-gray-600 dark:text-light">Header</h4>
-                    <p class="text-sm font-normal text-gray-400 truncate dark:text-primary-lighter" id="History"></p>
-                    <span class="text-sm font-normal text-gray-400 dark:text-primary-light"> Post </span>
+                    <p class="text-sm font-normal text-gray-400 truncate dark:text-primary-lighter" x-text="searchUrl"></p>
+                    <span class="text-sm font-normal text-gray-400 dark:text-primary-light">Busquedas</span>
                   </div>
                 </a>
               </template>
@@ -1813,7 +1723,12 @@
           openSearchPanel() {
             this.isSearchPanelOpen = true
             this.$nextTick(() => {
+    
               this.$refs.searchInput.focus()
+              const searchUrl = this.$refs.searchInput.value
+              
+              this.searchHistory.unshift(searchUrl);
+              
               
             })
           },
